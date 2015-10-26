@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: members
+#
+#  id          :integer          not null, primary key
+#  code        :string(255)
+#  name        :string(255)
+#  birthdate   :date
+#  status      :string(255)
+#  locality_id :integer
+#  group_id    :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  name: MyString
+  birthdate: 2015-10-25
+  status: MyString
+  locality_id: 
+  group_id: 
+
+two:
+  code: MyString
+  name: MyString
+  birthdate: 2015-10-25
+  status: MyString
+  locality_id: 
+  group_id: 
