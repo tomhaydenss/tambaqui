@@ -16,7 +16,8 @@
 class Member < ActiveRecord::Base
   belongs_to :locality
   belongs_to :group
-  has_many :addresses
+  has_many :address_members
+  has_many :addresses, through: :address_members
   has_and_belongs_to_many :parents
   has_and_belongs_to_many :contacts
 end

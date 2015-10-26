@@ -15,5 +15,6 @@
 
 class Meeting < ActiveRecord::Base
   belongs_to :group
-  has_many :attendance
+  has_many :attendances
+  has_many :members, through: :attendances
 end
