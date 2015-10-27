@@ -1,0 +1,2 @@
+class Mobilephone < Contact;
+end

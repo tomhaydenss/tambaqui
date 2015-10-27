@@ -47,32 +47,25 @@ ActiveRecord::Schema.define(version: 20151026033541) do
   add_index "attendances", ["member_id"], name: "index_attendances_on_member_id", using: :btree
 
   create_table "contacts", force: :cascade do |t|
+    t.string   "description",      limit: 255
+    t.string   "type",             limit: 255
+    t.integer  "contactable_id",   limit: 4
+    t.string   "contactable_type", limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+  end
+
+  add_index "contacts", ["contactable_type", "contactable_id"], name: "index_contacts_on_contactable_type_and_contactable_id", using: :btree
+
+  create_table "groups", force: :cascade do |t|
+    t.string   "code",        limit: 255
     t.string   "description", limit: 255
-    t.string   "type",        limit: 255
+    t.integer  "group_id",    limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
 
-  create_table "contacts_members", id: false, force: :cascade do |t|
-    t.integer "contact_id", limit: 4, null: false
-    t.integer "member_id",  limit: 4, null: false
-  end
-
-  add_index "contacts_members", ["contact_id"], name: "fk_rails_aef47270ad", using: :btree
-  add_index "contacts_members", ["member_id"], name: "fk_rails_78e9e897f7", using: :btree
-
-  create_table "contacts_parents", id: false, force: :cascade do |t|
-    t.integer "contact_id", limit: 4, null: false
-    t.integer "parent_id",  limit: 4, null: false
-  end
-
-  add_index "contacts_parents", ["contact_id"], name: "fk_rails_6f91ef37d0", using: :btree
-  add_index "contacts_parents", ["parent_id"], name: "fk_rails_dc92d52b6a", using: :btree
-
-  create_table "groups", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+  add_index "groups", ["group_id"], name: "index_groups_on_group_id", using: :btree
 
   create_table "kinships", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -83,9 +76,12 @@ ActiveRecord::Schema.define(version: 20151026033541) do
   create_table "localities", force: :cascade do |t|
     t.string   "code",        limit: 255
     t.string   "description", limit: 255
+    t.integer  "locality_id", limit: 4
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  add_index "localities", ["locality_id"], name: "index_localities_on_locality_id", using: :btree
 
   create_table "meetings", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -135,10 +131,8 @@ ActiveRecord::Schema.define(version: 20151026033541) do
   add_foreign_key "address_members", "members"
   add_foreign_key "attendances", "meetings"
   add_foreign_key "attendances", "members"
-  add_foreign_key "contacts_members", "contacts"
-  add_foreign_key "contacts_members", "members"
-  add_foreign_key "contacts_parents", "contacts"
-  add_foreign_key "contacts_parents", "parents"
+  add_foreign_key "groups", "groups"
+  add_foreign_key "localities", "localities"
   add_foreign_key "meetings", "groups"
   add_foreign_key "members", "groups"
   add_foreign_key "members", "localities"

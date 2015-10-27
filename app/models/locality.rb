@@ -10,4 +10,8 @@
 #
 
 class Locality < ActiveRecord::Base
+  has_many :sub_localities, class_name: "Locality",
+                          foreign_key: "locality_id"
+  belongs_to :parent_locality, class_name: "Locality",
+                          foreign_key: "locality_id"
 end

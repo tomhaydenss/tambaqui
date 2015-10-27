@@ -8,4 +8,8 @@
 #
 
 class Group < ActiveRecord::Base
+  has_many :sub_groups, class_name: "Group",
+                          foreign_key: "group_id"
+  belongs_to :parent_group, class_name: "Group",
+                          foreign_key: "group_id"
 end

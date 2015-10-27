@@ -11,5 +11,5 @@
 
 class Parent < ActiveRecord::Base
   belongs_to :kinship
-  has_and_belongs_to_many :contacts
+  has_many :contacts, as: :contactable
 end
